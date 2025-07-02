@@ -1,7 +1,7 @@
 Get Closest Point on Scalp
 ==========================
 
-This script provides functionality to find the point on the scale (provided as a VTK file) that is closest to a given query point.
+This script provides functionality to find the point on the scalp (provided as a VTK file) that is closest to a given query point.
 
 Requirements
 ------------
