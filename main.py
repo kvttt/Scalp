@@ -11,7 +11,7 @@ def main(
     scalp_fn: str, 
     query_point: tuple | list | np.ndarray, 
     method = 'closest_point_pv',
-    print_source_coord: bool = True,
+    print_query_coord: bool = True,
     print_closest_coord: bool = True,
     print_distance: bool = True,
     demo: bool = False,
@@ -34,8 +34,8 @@ def main(
     p.add_points(query_point, color='red', point_size=20, render_points_as_spheres=True, label='Query Point')
     p.add_points(closest_point, color='blue', point_size=20, render_points_as_spheres=True, label='Closest Point')
     text = ""
-    if print_source_coord:
-        text += f"Source Coordinates: {np.round(query_point, 2)}\n"
+    if print_query_coord:
+        text += f"Query Coordinates: {np.round(query_point, 2)}\n"
     if print_closest_coord:
         text += f"Closest Coordinates: {np.round(closest_point, 2)}\n"
     if print_distance:
@@ -110,7 +110,7 @@ if __name__ == "__main__":
     parser.add_argument("--scalp_fn", "-s", type=str, help="Path to the scalp VTK file.")
     parser.add_argument("--query_point", "-q", type=float, nargs=3, help="Query point coordinates.")
     parser.add_argument("--method", "-m", type=str, default="closest_point_pv", help="Method to use for finding the closest point. Options: 'closest_point_pv', 'kd_tree_scipy', 'reference'. Default is 'closest_point_pv'.")
-    parser.add_argument("--print_source_coord", "-ps", action='store_true', default=True, help="Print the source coordinates. Default is True.")
+    parser.add_argument("--print_query_coord", "-pq", action='store_true', default=True, help="Print the query coordinates. Default is True.")
     parser.add_argument("--print_closest_coord", "-pc", action='store_true', default=True, help="Print the closest coordinates. Default is True.")
     parser.add_argument("--print_distance", "-pd", action='store_true', default=True, help="Print the distance to the closest point. Default is True.")
     parser.add_argument("--benchmark", "-b", action='store_true', help="Run benchmark tests.")
@@ -128,7 +128,7 @@ if __name__ == "__main__":
             scalp_fn=args.scalp_fn, 
             query_point=args.query_point, 
             method=args.method, 
-            print_source_coord=args.print_source_coord, 
+            print_query_coord=args.print_query_coord, 
             print_closest_coord=args.print_closest_coord, 
             print_distance=args.print_distance, 
         )

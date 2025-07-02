@@ -26,8 +26,8 @@ options:
                         Query point coordinates.
   --method METHOD, -m METHOD
                         Method to use for finding the closest point. Options: 'closest_point_pv', 'kd_tree_scipy', 'reference'. Default is 'closest_point_pv'.
-  --print_source_coord, -ps
-                        Print the source coordinates. Default is True.
+  --print_query_coord, -pq
+                        Print the query coordinates. Default is True.
   --print_closest_coord, -pc
                         Print the closest coordinates. Default is True.
   --print_distance, -pd
@@ -39,7 +39,7 @@ options:
 For example, for a query point at coordinates `(-48.97, 11.73, 56.77)` and scalp surface saved in `whole_skull.vtk`, you can run:
 
 ```bash
-python ./main.py -s whole_skull.vtk -q -48.97 11.73 56.77 -m closest_point_pv -ps -pc -pd
+python ./main.py -s whole_skull.vtk -q -48.97 11.73 56.77 -m closest_point_pv -pq -pc -pd
 ```
 
 To compare the performance of different methods, you can run:
