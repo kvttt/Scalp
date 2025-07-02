@@ -10,7 +10,7 @@ from scipy.spatial import KDTree
 def main(
     scalp_fn: str, 
     query_point: tuple | list | np.ndarray, 
-    method = 'closest_point_pv',
+    method: str = 'closest_point_pv',
     print_query_coord: bool = True,
     print_closest_coord: bool = True,
     print_distance: bool = True,
