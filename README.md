@@ -42,12 +42,6 @@ For example, for a query point at coordinates `(-48.97, 11.73, 56.77)` and scalp
 python ./main.py -s whole_skull.vtk -q -48.97 11.73 56.77 -m closest_point_pv -pq -pc -pd
 ```
 
-To compare the performance of different methods, you can run:
-
-```bash
-python ./main.py -b
-```
-
 The result would look like this:
 ![demo.png](demo.png)
 
@@ -55,4 +49,21 @@ Should you wish to reproduce the demo, you can run:
 
 ```bash
 python ./main.py -d
+```
+
+To compare the performance of different methods, you can run:
+
+```bash
+python ./main.py -b -s whole_skull.vtk -q -48.97 11.73 56.77
+```
+
+On a MacBook Pro M4 Max (2024), the results are as follows:
+
+```
+closest_point_pv: 15.03 (1.17) ms.
+Index: 180331, Coordinates: [-59.7   18.3   69.82], Distance: 18.13 mm
+kd_tree_scipy: 55.24 (0.91) ms.
+Index: 180331, Coordinates: [-59.7   18.3   69.82], Distance: 18.13 mm
+reference: 931.73 (7.87) ms.
+Index: 180331, Coordinates: [-59.7   18.3   69.82], Distance: 18.13 mm
 ```

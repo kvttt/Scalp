@@ -67,13 +67,13 @@ def get_closest_point(scalp: pv.PolyData, query_point: np.ndarray, method: str =
     else:
         raise NotImplementedError(f"Method '{method}' is not implemented.")
     
-def benchmark():
+def benchmark(scalp_fn: str, query_point: tuple | list | np.ndarray) -> None:
     # closest_point_pv
     t_lst = []
     for _ in range(10):
         t0 = time.time() * 1000
-        scalp = pv.read("whole_skull.vtk")
-        query_point = np.array([-48.97, 11.73, 56.77]) 
+        scalp = pv.read(scalp_fn)
+        query_point = np.array(query_point)
         closest_point_id, closest_point, d = get_closest_point(scalp, query_point, method='closest_point_pv')
         t1 = time.time() * 1000
         t_lst.append(t1 - t0)
@@ -84,8 +84,8 @@ def benchmark():
     t_lst = []
     for _ in range(10):
         t0 = time.time() * 1000
-        scalp = pv.read("whole_skull.vtk")
-        query_point = np.array([-48.97, 11.73, 56.77]) 
+        scalp = pv.read(scalp_fn)
+        query_point = np.array(query_point)
         closest_point_id, closest_point, d = get_closest_point(scalp, query_point, method='kd_tree_scipy')
         t1 = time.time() * 1000
         t_lst.append(t1 - t0)
@@ -96,8 +96,8 @@ def benchmark():
     t_lst = []
     for _ in range(10):
         t0 = time.time() * 1000
-        scalp = pv.read("whole_skull.vtk")
-        query_point = np.array([-48.97, 11.73, 56.77]) 
+        scalp = pv.read(scalp_fn)
+        query_point = np.array(query_point)
         closest_point_id, closest_point, d = get_closest_point(scalp, query_point, method='reference')
         t1 = time.time() * 1000
         t_lst.append(t1 - t0)
@@ -118,7 +118,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     if args.benchmark:
-        benchmark()
+        if not args.scalp_fn or not args.query_point:
+            print("Expect scalp_fn and query_point to be provided for benchmark.")
+            sys.exit(1)
+        benchmark(scalp_fn=args.scalp_fn, query_point=args.query_point)
         sys.exit(0)
     elif args.demo:
         main(scalp_fn='', query_point=(0, 0, 0), demo=True)
